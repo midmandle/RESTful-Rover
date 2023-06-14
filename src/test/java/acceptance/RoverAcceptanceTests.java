@@ -27,7 +27,7 @@ public class RoverAcceptanceTests {
     Response res;
 
     @Test
-    void user_create_rover_and_send_simple_command(){
+    void user_create_rover_and_send_simple_move_command(){
         // arrange
         String UUID = "4f342955-1927-4146-ab39-a467bce5580f";
 
