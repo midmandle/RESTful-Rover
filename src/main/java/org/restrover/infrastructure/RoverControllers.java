@@ -16,6 +16,9 @@ public class RoverControllers {
     public String createRoverHandler(Request req, Response res) {
         String receivedUUID = extractPropertyFromBody(req, "id");
         roverService.createRover(receivedUUID);
+
+        res.type("application/json");
+        res.status(201);
         return "Created";
     }
 
