@@ -1,22 +1,26 @@
 package org.restrover.infrastructure;
 
-import com.eclipsesource.json.JsonArray;
 import org.restrover.domain.Rover;
 import org.restrover.domain.RoverRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InMemoryRoverRepository implements RoverRepository {
-    private final List<Rover> rovers = new ArrayList<>();
+    private final Map<String, Rover> rovers = new HashMap<>();
 
     @Override
     public void create(Rover rover) {
-        rovers.add(rover);
+        rovers.put(rover.getId(), rover);
     }
 
     @Override
-    public List<Rover> getAll() {
+    public Map<String, Rover> getAll() {
         return rovers;
+    }
+
+    @Override
+    public Rover getRover(String id) {
+        return rovers.getOrDefault(id, new Rover(""));
     }
 }

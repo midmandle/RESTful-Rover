@@ -1,5 +1,6 @@
 package org.restrover.application;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -9,17 +10,26 @@ import org.restrover.domain.RoverRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class RoverServiceShould {
     @Mock
     RoverRepository roverRepository;
+    @Mock
+    Rover rover;
+    private RoverService roverService;
+
+    @BeforeEach
+    void initialize(){
+        roverService = new RoverService(roverRepository);
+    }
 
     @Test
     void call_create_on_given_repository_with_new_rover(){
         // arrange
         String id = "some-id";
-        RoverService roverService = new RoverService(roverRepository);
+
 
         // act
         roverService.createRover(id);
@@ -27,5 +37,19 @@ class RoverServiceShould {
         // assert
         Rover newRover = new Rover(id);
         verify(roverRepository).create(newRover);
+    }
+
+    @Test
+    void find_rover_and_execute_command(){
+        // arrange
+        String command = "M";
+        String id = "some-id";
+        when(roverRepository.getRover(id)).thenReturn(rover);
+
+        // act
+        roverService.executeCommand(id, command);
+
+        // assert
+        verify(rover).execute(command);
     }
 }

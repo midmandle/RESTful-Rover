@@ -12,7 +12,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import spark.Request;
 import spark.Response;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.HashMap;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -40,8 +42,14 @@ public class RoverAcceptanceTests {
 
         //TODO: Check that this works as expected
         when(req.body()).thenReturn(new JsonObject().add("command", "M").toString());
+        when(req.params()).thenReturn(new HashMap<>() {{
+            put("id", "some-id");
+        }});
         roverControllers.sendCommandToRover(req, res);
 
+        when(req.params()).thenReturn(new HashMap<>() {{
+            put("id", "some-id");
+        }});
         String actualResponse = roverControllers.getRoverPositionHandler(req, res);
 
         // assert
@@ -53,7 +61,7 @@ public class RoverAcceptanceTests {
                 .add("Direction", "N")
                 .toString();
 
-        assertEquals(expectedResponse, actualResponse);
+        assertThat(expectedResponse).isEqualTo(actualResponse);
     }
 
 }

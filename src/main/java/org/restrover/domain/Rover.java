@@ -4,9 +4,16 @@ import java.util.Objects;
 
 public class Rover {
     private final String id;
+    private String direction = "N";
+    private int y = 0;
+    private int x = 0;
 
     public Rover(String id) {
         this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -20,5 +27,24 @@ public class Rover {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void execute(String command) {
+        if(command.equals("M") && direction.equals("N")){
+            y += 1;
+        }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+
+    public int getY() {
+        return y;
+    }
+
+    public String getDirection() {
+        return direction;
     }
 }
