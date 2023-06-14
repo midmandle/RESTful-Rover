@@ -10,8 +10,8 @@ public class InMemoryRoverRepository implements RoverRepository {
     private final Map<String, Rover> rovers = new HashMap<>();
 
     @Override
-    public void create(Rover rover) {
-        rovers.put(rover.getId(), rover);
+    public void create(String id, Rover rover) {
+        rovers.put(id, rover);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class RoverService {
     }
 
     public void createRover(String uuid) {
-        roverRepository.create(new Rover(uuid));
+        roverRepository.create(uuid, new Rover(uuid));
     }
 
     public void executeCommand(String id, String command) {

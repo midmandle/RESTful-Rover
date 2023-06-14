@@ -22,7 +22,7 @@ class InMemoryRoverRepositoryShould {
         Rover rover = new Rover(id);
 
         // act
-        roverRepository.create(rover);
+        roverRepository.create(id, rover);
 
         // assert
         assertThat(roverRepository.getAll()).contains(entry(id, rover));
@@ -34,7 +34,7 @@ class InMemoryRoverRepositoryShould {
         String id = "some-id";
         Rover rover = new Rover(id);
         InMemoryRoverRepository roverRepository = new InMemoryRoverRepository();
-        roverRepository.create(rover);
+        roverRepository.create(id, rover);
 
         // act
         Rover actualRover = roverRepository.getRover(id);

@@ -9,7 +9,6 @@ import org.restrover.domain.Rover;
 import org.restrover.domain.RoverRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,7 +36,7 @@ class RoverServiceShould {
 
         // assert
         Rover newRover = new Rover(id);
-        verify(roverRepository).create(newRover);
+        verify(roverRepository).create(id, newRover);
     }
 
     @Test
