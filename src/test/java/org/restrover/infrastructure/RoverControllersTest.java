@@ -33,7 +33,7 @@ class RoverControllersTest {
     }
 
     @Test
-    void should_create_rover() {
+    void should_return_response_properties() {
         String uuid = "4f342955-1927-4146-ab39-a467bce5580f";
         RoverControllers roverControllers = new RoverControllers(roverService);
         when(request.body()).thenReturn(new JsonObject().add("id", uuid).toString());
