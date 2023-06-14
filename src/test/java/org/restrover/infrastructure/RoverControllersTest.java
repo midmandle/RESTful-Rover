@@ -2,12 +2,15 @@ package org.restrover.infrastructure;
 
 import com.eclipsesource.json.JsonObject;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.restrover.application.RoverService;
 import spark.Request;
 import spark.Response;
 
 import static org.mockito.Mockito.*;
+@ExtendWith(MockitoExtension.class)
 class RoverControllersTest {
 
     @Mock
@@ -27,4 +30,6 @@ class RoverControllersTest {
 
         verify(roverService).createRover(uuid);
     }
+
+
 }
