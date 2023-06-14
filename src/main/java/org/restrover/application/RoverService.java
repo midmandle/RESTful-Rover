@@ -18,4 +18,8 @@ public class RoverService {
         Rover rover = roverRepository.getRover(id);
         rover.execute(command);
     }
+
+    public Rover getRover(String id) {
+        return roverRepository.getRover(id);
+    }
 }

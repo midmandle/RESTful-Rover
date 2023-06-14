@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.restrover.application.RoverService;
+import org.restrover.domain.Rover;
 import spark.Request;
 import spark.Response;
 
@@ -16,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class RoverControllersTest {
+class RoverControllersShould {
 
     @Mock
     RoverService roverService;
@@ -89,5 +90,43 @@ class RoverControllersTest {
         verify(response).type("application/json");
         verify(response).status(200);
         assertThat("Command sent").isEqualTo(actualResponse);
+    }
+
+    @Test
+    void should_call_service_to_get_the_rover_by_id(){
+        // arrange
+        String id = "some-id";
+        when(request.params()).thenReturn(new HashMap<>() {{
+            put("id", id);
+        }});
+        when(roverService.getRover(id)).thenReturn(new Rover("some-id"));
+
+        // act
+        roverControllers.getRoverPositionHandler(request, response);
+
+        // assert
+        verify(roverService).getRover(id);
+    }
+
+    @Test
+    void should_call_rover_in_json_status_and_content_type(){
+        // arrange
+        String id = "some-id";
+        when(request.params()).thenReturn(new HashMap<>() {{
+            put("id", id);
+        }});
+        when(roverService.getRover(id)).thenReturn(new Rover("some-id"));
+
+        // act
+        String roverPositionHandlerResponse = roverControllers.getRoverPositionHandler(request, response);
+
+        // assert
+        verify(response).status(200);
+        verify(response).type("application/json");
+        assertThat(roverPositionHandlerResponse).isEqualTo(new JsonObject()
+                .add("X", 0)
+                .add("Y", 0)
+                .add("Direction", "N")
+                .toString());
     }
 }

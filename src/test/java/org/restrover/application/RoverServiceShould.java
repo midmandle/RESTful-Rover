@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.restrover.domain.Rover;
 import org.restrover.domain.RoverRepository;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,5 +52,18 @@ class RoverServiceShould {
 
         // assert
         verify(rover).execute(command);
+    }
+
+    @Test
+    void call_repository_to_get_rover_by_id_and_return_it(){
+        // arrange
+        String id = "some-id";
+        Rover expectedRover = new Rover(id);
+        when(roverRepository.getRover(id)).thenReturn(expectedRover);
+        // act
+        Rover actualRover = roverService.getRover(id);
+
+        // assert
+        assertThat(actualRover).isEqualTo(expectedRover);
     }
 }

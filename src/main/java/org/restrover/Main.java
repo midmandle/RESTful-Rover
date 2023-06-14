@@ -15,6 +15,7 @@ public class Main {
 
         post("/rover", (req, res) -> roverControllers.createRoverHandler(req, res));
         post("/command/:id", (req, res) -> roverControllers.sendCommandToRover(req, res));
+        get("/rover/:id", (req, res) -> roverControllers.getRoverPositionHandler(req, res));
     }
 
     private static void initializeRoverController() {

@@ -15,8 +15,7 @@ import spark.Response;
 import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RoverAcceptanceTests {
@@ -36,32 +35,27 @@ public class RoverAcceptanceTests {
         RoverService roverService = new RoverService(roverRepository);
         RoverControllers roverControllers = new RoverControllers(roverService);
 
+        when(req.body()).thenReturn(new JsonObject().add("id", UUID).toString(), new JsonObject().add("command", "M").toString());
+        when(req.params()).thenReturn(new HashMap<>() {{
+            put("id", UUID);
+        }});
+
         // act
-        when(req.body()).thenReturn(new JsonObject().add("id", UUID).toString());
         roverControllers.createRoverHandler(req, res);
-
-        //TODO: Check that this works as expected
-        when(req.body()).thenReturn(new JsonObject().add("command", "M").toString());
-        when(req.params()).thenReturn(new HashMap<>() {{
-            put("id", "some-id");
-        }});
         roverControllers.sendCommandToRover(req, res);
-
-        when(req.params()).thenReturn(new HashMap<>() {{
-            put("id", "some-id");
-        }});
         String actualResponse = roverControllers.getRoverPositionHandler(req, res);
 
         // assert
-        verify(res).type("application/json");
-        verify(res).status(200);
+        verify(res, times(3)).type("application/json");
+        verify(res, times(1)).status(201);
+        verify(res, times(2)).status(200);
         String expectedResponse = new JsonObject()
                 .add("X", 0)
                 .add("Y", 1)
                 .add("Direction", "N")
                 .toString();
 
-        assertThat(expectedResponse).isEqualTo(actualResponse);
+        assertThat(actualResponse).isEqualTo(expectedResponse);
     }
 
 }
