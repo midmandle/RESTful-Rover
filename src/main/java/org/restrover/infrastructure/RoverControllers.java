@@ -5,8 +5,10 @@ import spark.Request;
 import spark.Response;
 
 public class RoverControllers {
-    public RoverControllers(RoverService roverRepository) {
-        throw new UnsupportedOperationException();
+    private final RoverService roverService;
+
+    public RoverControllers(RoverService roverService) {
+        this.roverService = roverService;
     }
 
     public String createRoverHandler(Request req, Response res) {

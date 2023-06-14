@@ -8,4 +8,8 @@ public class RoverService {
     public RoverService(RoverRepository roverRepository) {
         this.roverRepository = roverRepository;
     }
+
+    public void createRover(String uuid) {
+        throw new UnsupportedOperationException();
+    }
 }
