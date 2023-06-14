@@ -1,5 +1,6 @@
 package org.restrover.application;
 
+import org.restrover.domain.Rover;
 import org.restrover.domain.RoverRepository;
 
 public class RoverService {
@@ -10,6 +11,6 @@ public class RoverService {
     }
 
     public void createRover(String uuid) {
-        throw new UnsupportedOperationException();
+        roverRepository.create(new Rover(uuid));
     }
 }
