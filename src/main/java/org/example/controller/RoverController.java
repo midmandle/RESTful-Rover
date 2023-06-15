@@ -26,7 +26,11 @@ public class RoverController {
     }
 
     public String moveHandler(Request request, Response response) {
-        throw new UnsupportedOperationException();
+        JsonObject roverIDJSON = Json.parse(request.body()).asObject();
+        String UUID = roverIDJSON.getString("id", null);
+        int units = Integer.parseInt(request.params("units"));
+        roverModel.moveRover(UUID, units);
+        return null;
     }
 
     public String rotateHandler(Request request, Response response) {

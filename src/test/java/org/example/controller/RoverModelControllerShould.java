@@ -43,12 +43,18 @@ class RoverModelControllerShould {
     @Test
     void call_rover_model_to_move(){
         //Arrange
-        String UUID = "957989cd-efaa-47f9-93db-b83d95e3f2e6";
         int units = 2;
+        String UUID = "957989cd-efaa-47f9-93db-b83d95e3f2e6";
+        JsonObject roverIdJSON = new JsonObject();
+        roverIdJSON.add("id", UUID);
+
         RoverController roverController = new RoverController(roverModel);
+        when(request.body()).thenReturn(roverIdJSON.toString());
+        when(request.params("units")).thenReturn(String.format("%d", units));
 
         //Act
         roverController.moveHandler(request, response);
+
         //Assert
         verify(roverModel).moveRover(UUID,units);
     }
