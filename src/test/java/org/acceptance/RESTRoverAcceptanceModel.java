@@ -63,6 +63,7 @@ class RESTRoverAcceptanceModel {
         );
 
         when(request.params("id")).thenReturn(UUID);
+        when(request.params("units")).thenReturn("2","1","1","1");
 
         // act
         roverController.createRoverHandler(request, response);

@@ -28,6 +28,7 @@ public class RoverController {
     public String moveHandler(Request request, Response response) {
         JsonObject roverIDJSON = Json.parse(request.body()).asObject();
         String UUID = roverIDJSON.getString("id", null);
+
         int units = Integer.parseInt(request.params("units"));
         roverModel.moveRover(UUID, units);
         return null;
