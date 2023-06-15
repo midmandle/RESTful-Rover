@@ -15,8 +15,8 @@ class RoverShould {
         rover.execute("M");
 
         // assert
-        assertThat(rover.getX()).isEqualTo(0);
-        assertThat(rover.getY()).isEqualTo(1);
-        assertThat(rover.getDirection()).isEqualTo("N");
+        assertThat(rover.x).isEqualTo(0);
+        assertThat(rover.y).isEqualTo(1);
+        assertThat(rover.direction).isEqualTo("N");
     }
 }

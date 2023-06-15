@@ -3,6 +3,7 @@ package org.restrover.infrastructure;
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
 import org.restrover.application.RoverService;
+import org.restrover.domain.JsonRover;
 import org.restrover.domain.Rover;
 import spark.Request;
 import spark.Response;
@@ -38,17 +39,10 @@ public class RoverControllers {
     public String getRoverPositionHandler(Request req, Response res) {
         String id = req.params().get("id");
         Rover rover = roverService.getRover(id);
+        JsonRover jsonRover = new JsonRover(rover);
         res.status(200);
         res.type(TYPE_JSON);
-        return jsonForRover(rover);
-    }
-
-    private String jsonForRover(Rover rover) {
-        return new JsonObject()
-                .add("X", rover.getX())
-                .add("Y", rover.getY())
-                .add("Direction", rover.getDirection())
-                .toString();
+        return jsonRover.toJson();
     }
 
     private static String extractPropertyFromBody(Request req, String property) {

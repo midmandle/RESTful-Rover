@@ -3,10 +3,10 @@ package org.restrover.domain;
 import java.util.Objects;
 
 public class Rover {
-    private final String id;
-    private String direction = "N";
-    private int y = 0;
-    private int x = 0;
+    protected final String id;
+    protected String direction = "N";
+    protected int y = 0;
+    protected int x = 0;
 
     public Rover(String id) {
         this.id = id;
@@ -28,18 +28,5 @@ public class Rover {
         if(command.equals("M") && direction.equals("N")){
             y += 1;
         }
-    }
-
-    public int getX() {
-        return x;
-    }
-
-
-    public int getY() {
-        return y;
-    }
-
-    public String getDirection() {
-        return direction;
     }
 }
