@@ -24,4 +24,20 @@ class InMemoryRoverRepositoryTestModel {
         assertEquals(newRover,landedRoverModels.get(uuid));
     }
 
+    @Test
+    void should_find_a_rover_by_its_uuid(){
+        //Arrange
+        String uuid = "754b4aee-3782-47ad-a524-354e70345c22";
+        Rover existingRover = new Rover(0, 0, "N");
+        HashMap<String, Rover> existingRovers = new HashMap<>();
+        existingRovers.put(uuid, existingRover);
+        RoverRepository roverRepository = new InMemoryRoverRepository(existingRovers);
+
+        //Act
+        Rover roverFoundById = roverRepository.findRoverById(uuid);
+
+        //Assert
+        assertEquals(existingRover, roverFoundById);
+    }
+
 }

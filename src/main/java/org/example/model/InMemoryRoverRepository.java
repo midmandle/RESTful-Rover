@@ -1,8 +1,6 @@
 package org.example.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class InMemoryRoverRepository implements RoverRepository {
     private final HashMap<String, Rover> landedRoverModels;
@@ -21,7 +19,7 @@ public class InMemoryRoverRepository implements RoverRepository {
     }
 
     @Override
-    public void findRoverById(String uuid) {
-        throw new UnsupportedOperationException();
+    public Rover findRoverById(String uuid) {
+        return null;
     }
 }
