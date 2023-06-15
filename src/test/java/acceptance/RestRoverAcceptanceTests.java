@@ -24,7 +24,7 @@ public class RestRoverAcceptanceTests {
     @Mock
     Response response;
     @Test
-    void name_later(){
+    void user_creates_rover_use_command_and_retrieve_rover_position(){
         // arrange
         RoverRepository roverRepository = new InMemoryRoverRepository();
         RoverService roverService = new RoverService(roverRepository);
