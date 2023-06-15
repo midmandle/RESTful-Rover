@@ -1,11 +1,24 @@
 package org.acceptance;
 
 import com.eclipsesource.json.JsonObject;
+import org.example.controller.RoverController;
+import org.example.model.Rover;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import spark.Request;
+import spark.Response;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import static org.mockito.Mockito.when;
+@ExtendWith(MockitoExtension.class)
 class RESTRoverAcceptance {
+
+    @Mock
+    private Request request;
+    @Mock
+    private Response response;
 
     @Test
     void name_later() {
@@ -19,7 +32,8 @@ class RESTRoverAcceptance {
 //        GET: /rover/:id [x, y, direction]
 
         // arrange
-        RoverController roverController = new RoverController();
+        Rover rover = new Rover();
+        RoverController roverController = new RoverController(rover);
 
         String UUID = "83a857dc-6f65-40e4-88b6-c4487aa99fe4";
         JsonObject roverIdJSON = new JsonObject();
@@ -45,7 +59,7 @@ class RESTRoverAcceptance {
                 move1UnitJSON.toString()
         );
 
-        when(request.params()).thenReturn(roverIdJSON.toString());
+        when(request.params("id")).thenReturn(UUID);
 
         // act
         roverController.createRoverHandler(request, response);
