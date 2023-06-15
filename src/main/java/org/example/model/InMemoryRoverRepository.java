@@ -17,6 +17,6 @@ public class InMemoryRoverRepository implements RoverRepository {
 
     @Override
     public void store(String UUID) {
-        throw new UnsupportedOperationException();
+        landedRoverModels.put(UUID, new Rover(0,0,"N"));
     }
 }

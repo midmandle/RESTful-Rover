@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InMemoryRoverRepositoryTestModel {
@@ -18,7 +19,9 @@ class InMemoryRoverRepositoryTestModel {
         roverRepository.store(uuid);
 
         // assert
+        Rover newRover = new Rover(0, 0, "N");
         assertTrue(landedRoverModels.containsKey(uuid));
+        assertEquals(newRover,landedRoverModels.get(uuid));
     }
 
 }
