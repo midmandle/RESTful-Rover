@@ -20,6 +20,9 @@ class RoverModelControllerShould {
     @Mock
     private Response response;
 
+    @Mock
+    RoverModel roverModel;
+
     @Test
     void call_land_new_rover_method_when_creating_a_rover(){
         //Arrange
@@ -27,7 +30,6 @@ class RoverModelControllerShould {
         JsonObject roverIdJSON = new JsonObject();
         roverIdJSON.add("id", UUID);
 
-        RoverModel roverModel = mock(RoverModel.class);
         RoverController roverController = new RoverController(roverModel);
         when(request.body()).thenReturn(roverIdJSON.toString());
 
@@ -36,6 +38,19 @@ class RoverModelControllerShould {
         //Assert
         verify(roverModel).landNewRover(UUID);
         assertEquals(new JsonObject().add("created", true).toString(), roverHandler);
+    }
+
+    @Test
+    void call_rover_model_to_move(){
+        //Arrange
+        String UUID = "957989cd-efaa-47f9-93db-b83d95e3f2e6";
+        int units = 2;
+        RoverController roverController = new RoverController(roverModel);
+
+        //Act
+        roverController.moveHandler(request, response);
+        //Assert
+        verify(roverModel).moveRover(UUID,units);
     }
 
 }

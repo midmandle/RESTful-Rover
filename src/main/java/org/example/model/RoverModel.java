@@ -10,4 +10,8 @@ public class RoverModel {
     public void landNewRover(String UUID) {
         this.roverRepository.store(UUID);
     }
+
+    public void moveRover(String uuid, int units) {
+        throw new UnsupportedOperationException();
+    }
 }
