@@ -2,7 +2,9 @@ package org.acceptance;
 
 import com.eclipsesource.json.JsonObject;
 import org.example.controller.RoverController;
-import org.example.model.Rover;
+import org.example.model.InMemoryRoverRepository;
+import org.example.model.RoverModel;
+import org.example.model.RoverRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -13,7 +15,7 @@ import spark.Response;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-class RESTRoverAcceptance {
+class RESTRoverAcceptanceModel {
 
     @Mock
     private Request request;
@@ -21,7 +23,7 @@ class RESTRoverAcceptance {
     private Response response;
 
     @Test
-    void name_later() {
+    void create_rover_and_call_move_and_rotate_to_get_to_2_3_N() {
 //        Generamos un ID
 //        Creamos el rover
 //        POST: /rover {id}
@@ -32,8 +34,9 @@ class RESTRoverAcceptance {
 //        GET: /rover/:id [x, y, direction]
 
         // arrange
-        Rover rover = new Rover();
-        RoverController roverController = new RoverController(rover);
+        RoverRepository roverRepository = new InMemoryRoverRepository();
+        RoverModel roverModel = new RoverModel(roverRepository);
+        RoverController roverController = new RoverController(roverModel);
 
         String UUID = "83a857dc-6f65-40e4-88b6-c4487aa99fe4";
         JsonObject roverIdJSON = new JsonObject();

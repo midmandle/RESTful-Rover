@@ -5,19 +5,20 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class RoverShould {
+class RoverModelShould {
 
     @Test
     void call_repository_to_store_new_rover(){
         //Arrange
-        Rover rover = new Rover();
+        String UUID = "754b4aee-3782-47ad-a524-354e70345c51";
         RoverRepository roverRepository = mock(RoverRepository.class);
+        RoverModel roverModel = new RoverModel(roverRepository);
 
         //Act
-        rover.landNewRover();
+        roverModel.landNewRover(UUID);
 
         //Assert
-        verify(roverRepository).store(rover);
+        verify(roverRepository).store(UUID);
     }
 
 }

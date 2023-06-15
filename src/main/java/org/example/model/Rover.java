@@ -1,6 +1,4 @@
 package org.example.model;
 
-public class Rover {
-    public void landNewRover() {
-    }
+public record Rover(int xPosition, int yPosition, String direction) {
 }
