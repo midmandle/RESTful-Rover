@@ -20,6 +20,6 @@ public class InMemoryRoverRepository implements RoverRepository {
 
     @Override
     public Rover findRoverById(String uuid) {
-        return null;
+        return landedRoverModels.get(uuid);
     }
 }
