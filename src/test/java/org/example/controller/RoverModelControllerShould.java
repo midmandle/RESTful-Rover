@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import spark.Request;
 import spark.Response;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,9 +32,10 @@ class RoverModelControllerShould {
         when(request.body()).thenReturn(roverIdJSON.toString());
 
         //Act
-        roverController.createRoverHandler(request, response);
+        String roverHandler = roverController.createRoverHandler(request, response);
         //Assert
         verify(roverModel).landNewRover(UUID);
+        assertEquals(new JsonObject().add("created", true).toString(), roverHandler);
     }
 
 }
