@@ -6,4 +6,8 @@ public class RoverService {
     public RoverService(RoverRepository roverRepository) {
 
     }
+
+    public void create(String id) {
+        throw new UnsupportedOperationException();
+    }
 }

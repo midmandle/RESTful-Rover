@@ -10,7 +10,7 @@ public class RoverController {
     }
 
     public String getRoverHandler(Request request, Response response) {
-                throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     public String createRoverHandler(Request request, Response response) {
