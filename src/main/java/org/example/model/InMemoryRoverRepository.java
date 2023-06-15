@@ -1,25 +1,29 @@
 package org.example.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class InMemoryRoverRepository implements RoverRepository {
-    private final HashMap<String, Rover> landedRovers;
+    private final List<Rover> landedRovers;
 
-    public InMemoryRoverRepository(HashMap<String, Rover> landedRovers) {
+    public InMemoryRoverRepository(List<Rover> landedRovers) {
         this.landedRovers = landedRovers;
     }
 
     public InMemoryRoverRepository() {
-        this.landedRovers = new HashMap<>();
+        this.landedRovers = new ArrayList<>();
     }
 
     @Override
     public void store(String UUID) {
-        landedRovers.put(UUID, new Rover(0,0,"N"));
+        landedRovers.add(new Rover(UUID));
     }
 
     @Override
     public Rover findRoverById(String uuid) {
-        return landedRovers.get(uuid);
+        Rover expectedIdRover = new Rover(uuid);
+        int foundRoverIndex = landedRovers.indexOf(expectedIdRover);
+        return landedRovers.get(foundRoverIndex);
     }
 }

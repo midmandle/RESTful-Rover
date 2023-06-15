@@ -13,6 +13,8 @@ public class RoverModel {
     }
 
     public void moveRover(String uuid, int units) {
-        roverRepository.findRoverById(uuid);
+        Rover foundRover = roverRepository.findRoverById(uuid);
+        if(foundRover == null) return;
+        foundRover.move(units);
     }
 }

@@ -24,7 +24,7 @@ class RoverControllerShould {
     RoverModel roverModel;
 
     @Test
-    void call_land_new_rover_method_when_creating_a_rover(){
+    void call_land_new_rover_method_when_creating_a_rover() {
         //Arrange
         String UUID = "754b4aee-3782-47ad-a524-354e70345c51";
         JsonObject roverIdJSON = new JsonObject();
@@ -41,22 +41,22 @@ class RoverControllerShould {
     }
 
     @Test
-    void call_rover_model_to_move(){
+    void call_rover_model_to_move() {
         //Arrange
         int units = 2;
         String UUID = "957989cd-efaa-47f9-93db-b83d95e3f2e6";
-        JsonObject roverIdJSON = new JsonObject();
-        roverIdJSON.add("id", UUID);
+        JsonObject bodyJSON = new JsonObject();
+        bodyJSON.add("units", units);
 
         RoverController roverController = new RoverController(roverModel);
-        when(request.body()).thenReturn(roverIdJSON.toString());
-        when(request.params("units")).thenReturn(String.format("%d", units));
+        when(request.body()).thenReturn(bodyJSON.toString());
+        when(request.params("id")).thenReturn(UUID);
 
         //Act
         roverController.moveHandler(request, response);
 
         //Assert
-        verify(roverModel).moveRover(UUID,units);
+        verify(roverModel).moveRover(UUID, units);
     }
 
 }
