@@ -7,6 +7,8 @@ import spark.Request;
 import spark.Response;
 
 public class RoverController {
+    public static final String APPLICATION_JSON = "application/json";
+    public static final String CREATION_SUCCESS_MESSAGE = new JsonObject().add("message", "created").toString();
     private final RoverService roverService;
 
     public RoverController(RoverService roverService) {
@@ -22,7 +24,9 @@ public class RoverController {
         JsonObject body = Json.parse(request.body()).asObject();
         String id = body.getString("id", null);
         roverService.create(id);
-        return "";
+        response.status(201);
+        response.type(APPLICATION_JSON);
+        return CREATION_SUCCESS_MESSAGE;
     }
 
     public String moveRoverHandler(Request request, Response response) {

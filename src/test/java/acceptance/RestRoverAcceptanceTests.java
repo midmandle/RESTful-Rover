@@ -26,7 +26,7 @@ public class RestRoverAcceptanceTests {
     @Test
     void user_creates_rover_use_command_and_retrieve_rover_position(){
         // arrange
-        RoverRepository roverRepository = new InMemoryRoverRepository();
+        RoverRepository roverRepository = new InMemoryRoverRepository(new HashMap<>());
         RoverService roverService = new RoverService(roverRepository);
         RoverController roverController = new RoverController(roverService);
 

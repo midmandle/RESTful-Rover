@@ -7,11 +7,13 @@ import org.example.services.RoverService;
 import spark.Request;
 import spark.Response;
 
+import java.util.HashMap;
+
 import static spark.Spark.*;
 @SuppressWarnings("ALL")
 public class Main {
     public static void main(String[] args) {
-        RoverRepository roverRepository = new InMemoryRoverRepository();
+        RoverRepository roverRepository = new InMemoryRoverRepository(new HashMap<>());
         RoverService roverService = new RoverService(roverRepository);
         RoverController roverController = new RoverController(roverService);
 

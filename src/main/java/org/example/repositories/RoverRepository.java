@@ -1,4 +1,7 @@
 package org.example.repositories;
 
- public interface RoverRepository {
-}
+import org.example.domain.Rover;
+
+public interface RoverRepository {
+     void create(String id, Rover rover);
+ }

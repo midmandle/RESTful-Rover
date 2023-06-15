@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import spark.Request;
 import spark.Response;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,4 +35,19 @@ class RoverControllerShould {
         // assert
         verify(service).create(id);
     }
+    @Test
+    void return_appropriate_response_when_creating_rover(){
+        // arrange
+        String id = "some-id";
+        RoverController roverController = new RoverController(service);
+        when(request.body()).thenReturn(new JsonObject().add("id", id).toString());
+        // act
+
+        String controllerResponse = roverController.createRoverHandler(request, response);
+        // assert
+        verify(response).status(201);
+        verify(response).type("application/json");
+        assertThat(controllerResponse).isEqualTo(new JsonObject().add("message", "created").toString());
+    }
+
 }
