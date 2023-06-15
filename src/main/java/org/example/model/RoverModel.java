@@ -1,5 +1,6 @@
 package org.example.model;
 
+
 public class RoverModel {
     private final RoverRepository roverRepository;
 
@@ -12,6 +13,6 @@ public class RoverModel {
     }
 
     public void moveRover(String uuid, int units) {
-        throw new UnsupportedOperationException();
+        roverRepository.findRoverById(uuid);
     }
 }

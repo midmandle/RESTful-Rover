@@ -28,7 +28,7 @@ class RoverModelShould {
     }
 
     @Test
-    void call_repository_to_find_existing_rover(){
+    void call_repository_to_find_existing_rover_when_moving(){
         // arrange
         int units = 2;
         String UUID = "8714d4c1-a369-41ed-af03-88138f62b9e9";
