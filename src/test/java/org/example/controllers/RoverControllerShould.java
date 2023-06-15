@@ -49,5 +49,37 @@ class RoverControllerShould {
         verify(response).type("application/json");
         assertThat(controllerResponse).isEqualTo(new JsonObject().add("message", "created").toString());
     }
+    @Test
+    void call_given_service_when_move_rover(){
+        // arrange
+        String id = "some-id";
+        RoverController roverController = new RoverController(service);
+
+        // act
+        String command = "M";
+        when(request.body()).thenReturn(new JsonObject().add("command", command).toString());
+        when(request.params("id")).thenReturn(id);
+        roverController.moveRoverHandler(request, response);
+
+        // assert
+        verify(service).move(id, command);
+
+    }
+    @Test
+    void return_appropriate_response_when_moving_rover(){
+        // arrange
+        String id = "some-id";
+        RoverController roverController = new RoverController(service);
+        String command = "M";
+        when(request.body()).thenReturn(new JsonObject().add("command", command).toString());
+        when(request.params("id")).thenReturn(id);
+        // act
+        String controllerResponse = roverController.moveRoverHandler(request, response);
+        // assert
+        verify(response).status(200);
+        verify(response).type("application/json");
+        assertThat(controllerResponse).isEqualTo(new JsonObject().add("message", "moved").toString());
+    }
+
 
 }

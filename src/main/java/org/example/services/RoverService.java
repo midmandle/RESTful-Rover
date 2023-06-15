@@ -15,4 +15,9 @@ public class RoverService {
         Rover rover = new Rover(0,0,"N");
         roverRepository.create(id, rover);
     }
+
+    public void move(String id, String command) {
+        throw new UnsupportedOperationException();
+
+    }
 }

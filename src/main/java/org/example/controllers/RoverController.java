@@ -9,6 +9,7 @@ import spark.Response;
 public class RoverController {
     public static final String APPLICATION_JSON = "application/json";
     public static final String CREATION_SUCCESS_MESSAGE = new JsonObject().add("message", "created").toString();
+    public static final String MOVE_SUCCESS_MESSAGE = new JsonObject().add("message", "moved").toString();;
     private final RoverService roverService;
 
     public RoverController(RoverService roverService) {
@@ -30,6 +31,12 @@ public class RoverController {
     }
 
     public String moveRoverHandler(Request request, Response response) {
-        throw new UnsupportedOperationException();
+        JsonObject body = Json.parse(request.body()).asObject();
+        String command = body.getString("command", null);
+        String id = request.params("id");
+        roverService.move(id, command);
+        response.status(200);
+        response.type(APPLICATION_JSON);
+        return MOVE_SUCCESS_MESSAGE;
     }
 }
