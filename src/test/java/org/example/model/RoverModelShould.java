@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -37,6 +38,20 @@ class RoverModelShould {
         roverModel.moveRover(UUID, units);
         // assert
         verify(roverRepository).findRoverById(UUID);
+    }
+
+    @Test
+    void call_rover_move_when_moveRover_is_called(){
+        //Arrange
+        int units = 2;
+        Rover rover = mock(Rover.class);
+        RoverModel roverModel = new RoverModel(roverRepository);
+        String UUID = "985002fc-98ad-4f06-b45c-e74a755581dd";
+
+        //Act
+        roverModel.moveRover(UUID, units);
+        //Assert
+        verify(rover).move(units);
     }
 
 }
