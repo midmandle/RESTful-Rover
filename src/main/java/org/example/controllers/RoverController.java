@@ -2,6 +2,7 @@ package org.example.controllers;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
+import org.example.domain.Rover;
 import org.example.services.RoverService;
 import spark.Request;
 import spark.Response;
@@ -17,9 +18,6 @@ public class RoverController {
         this.roverService = roverService;
     }
 
-    public String getRoverHandler(Request request, Response response) {
-        throw new UnsupportedOperationException();
-    }
 
     public String createRoverHandler(Request request, Response response) {
         JsonObject body = Json.parse(request.body()).asObject();
@@ -38,5 +36,18 @@ public class RoverController {
         response.status(200);
         response.type(APPLICATION_JSON);
         return MOVE_SUCCESS_MESSAGE;
+    }
+    public String getRoverHandler(Request request, Response response) {
+
+        String id = request.params("id");
+        Rover rover = roverService.get(id);
+        response.status(200);
+        response.type(APPLICATION_JSON);
+
+        return new JsonObject()
+                .add("X", rover.getX())
+                .add("Y", rover.getY())
+                .add("Facing", rover.getFacing())
+                .toString();
     }
 }

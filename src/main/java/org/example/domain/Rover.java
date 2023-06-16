@@ -17,6 +17,19 @@ public class Rover {
             y++;
         }
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public String getFacing() {
+        return facing;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -21,4 +21,8 @@ public class RoverService {
         rover.execute(command);
         roverRepository.save(id, rover);
     }
+
+    public Rover get(String id) {
+        return roverRepository.getRoverById(id);
+    }
 }

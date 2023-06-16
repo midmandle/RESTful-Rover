@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 import com.eclipsesource.json.JsonObject;
+import org.example.domain.Rover;
 import org.example.services.RoverService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -79,6 +80,37 @@ class RoverControllerShould {
         verify(response).status(200);
         verify(response).type("application/json");
         assertThat(controllerResponse).isEqualTo(new JsonObject().add("message", "moved").toString());
+    }
+    @Test
+    void call_given_service_when_get_rover(){
+        String id = "some-id";
+        RoverController roverController = new RoverController(service);
+        // act
+        when(request.params("id")).thenReturn(id);
+        Rover rover = new Rover(0,0,"N");
+        when(service.get(id)).thenReturn(rover);
+        roverController.getRoverHandler(request, response);
+        // assert
+        verify(service).get(id);
+    }
+    @Test
+    void return_appropriate_response_when_getting_rover(){
+        // arrange
+        String id = "some-id";
+        RoverController roverController = new RoverController(service);
+        when(request.params("id")).thenReturn(id);
+        Rover rover = new Rover(0,1,"N");
+        when(service.get(id)).thenReturn(rover);
+        // act
+        String controllerResponse = roverController.getRoverHandler(request, response);
+        // assert
+        verify(response).status(200);
+        verify(response).type("application/json");
+        assertThat(controllerResponse).isEqualTo(new JsonObject()
+                .add("X", 0)
+                .add("Y", 1)
+                .add("Facing", "N")
+                .toString());
     }
 
 
