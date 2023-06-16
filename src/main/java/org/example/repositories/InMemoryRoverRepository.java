@@ -14,7 +14,15 @@ public class InMemoryRoverRepository implements RoverRepository {
     }
 
     @Override
-    public void create(String id, Rover rover) {
+    public void save(String id, Rover rover) {
         rovers.put(id, rover);
     }
+
+    @Override
+    public Rover getRoverById(String id) {
+        return rovers.get(id);
+    }
+
+
+
 }

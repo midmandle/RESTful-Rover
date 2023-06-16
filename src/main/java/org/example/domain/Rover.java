@@ -4,9 +4,19 @@ import java.util.Objects;
 
 public class Rover {
     private final int x;
-    private final int y;
+    private int y;
     private final String facing;
 
+    public Rover(int x, int y, String facing) {
+        this.x = x;
+        this.y = y;
+        this.facing = facing;
+    }
+    public void execute(String command) {
+        if(command.equals("M") && facing.equals("N")) {
+            y++;
+        }
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -20,9 +30,5 @@ public class Rover {
         return Objects.hash(x, y, facing);
     }
 
-    public Rover(int x, int y, String facing) {
-        this.x = x;
-        this.y = y;
-        this.facing = facing;
-    }
+
 }

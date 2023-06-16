@@ -3,5 +3,8 @@ package org.example.repositories;
 import org.example.domain.Rover;
 
 public interface RoverRepository {
-     void create(String id, Rover rover);
- }
+     void save(String id, Rover rover);
+
+    Rover getRoverById(String id);
+
+}

@@ -13,11 +13,12 @@ public class RoverService {
 
     public void create(String id) {
         Rover rover = new Rover(0,0,"N");
-        roverRepository.create(id, rover);
+        roverRepository.save(id, rover);
     }
 
     public void move(String id, String command) {
-        throw new UnsupportedOperationException();
-
+        Rover rover = roverRepository.getRoverById(id);
+        rover.execute(command);
+        roverRepository.save(id, rover);
     }
 }
