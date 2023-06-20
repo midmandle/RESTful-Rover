@@ -1,5 +1,7 @@
 package org.example.model;
 
+import com.eclipsesource.json.JsonObject;
+
 import java.util.Objects;
 
 public class Rover {
@@ -30,5 +32,13 @@ public class Rover {
         if (o == null || getClass() != o.getClass()) return false;
         Rover rover = (Rover) o;
         return Objects.equals(identifier, rover.identifier);
+    }
+
+    public JsonObject toJSON() {
+        JsonObject responseJSON = new JsonObject();
+        responseJSON.add("x", xPosition);
+        responseJSON.add("y", yPosition);
+        responseJSON.add("direction", direction);
+        return responseJSON;
     }
 }
